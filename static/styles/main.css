@@ -1,0 +1,75 @@
+body{
+    background-image: url('../assets/crime.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    font-family:  FreeMono, "Andale Mono";
+    list-style-type: none;
+
+}
+
+h1{
+    font-family:  FreeMono, "Andale Mono";
+    font-style: oblique;
+    font-variant: small-caps;
+}
+
+h2{
+    font-family:  FreeMono, "Andale Mono";
+    font-style: oblique;
+    font-variant: small-caps;
+    margin: 3% 0%;
+}
+
+input{
+    width: 80%;
+    padding: 15px 22px;
+    margin: 10px 5px;
+    box-sizing: border-box;
+    font-family:  FreeMono, "Andale Mono";
+    font-variant: small-caps;
+}
+
+input[type=submit]{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+ul{ 
+    list-style-type: none; 
+    padding: 5px;
+}
+
+
+.plan_title_div{
+    margin: 5% 15% 0%;
+    background-color:rgb(255,255,255);
+    opacity:0.99;
+    padding: 2%;
+    box-shadow: 12px 12px 2px 1px rgba(2, 2, 66, 0.2);
+}
+
+
+.treasury_div{
+    width: 30%;
+    margin: 2% 0% 0% 15%;
+    background-color:rgb(255,255,255);
+    opacity:0.99;
+    padding-bottom: 20%;
+    padding-top: 1%;
+    box-shadow: 12px 12px 2px 1px rgba(2, 2, 66, 0.2);
+    float: left;
+    list-style-type: none;
+}
+
+.drawing_board_div{
+    width: 35%;
+    margin: 2% 15% 0% 0%;
+    background-color:rgb(255,255,255);
+    opacity:0.99;
+    padding-bottom: 20%;
+    padding-top: 1%;
+    box-shadow: 12px 12px 2px 1px rgba(2, 2, 66, 0.2);
+    float: right;
+}
+

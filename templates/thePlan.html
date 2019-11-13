@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<head>
+    <title>The Heist</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+    <div class="plan_title_div">
+        <h1>The Plan</h1>
+        <p class="subtitle">To acquire all the loot!</p>
+    </div>
+    <div class="treasury_div">
+        <h2>Treasury</h2>
+        <hr/>
+        <ul style="padding:0px">
+            {% for item in loot %}
+                {% if item.title in messages %}<li style="background-color: lightgrey">
+                {% else %} <li style="margin:0px; padding: 3px"> {% endif %}
+                <a data-toggle="modal" data-target="#editModal" data-title='{{ item.title }}' 
+                    data-artist='{{ item.artist }}' data-album='{{ item.album }}' data-filename='{{ item.filename }}'>
+                    <h5>{{ item.title }}</h5>
+                    <p style="margin:0px">{{ item.artist }} - {{ item.album }}</p>
+                </a></li>
+              <li><hr style="margin: 0px; padding:0px" /></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="drawing_board_div">
+        <form method="POST" action="execute_heist">
+            {% if messages %}<p>{{ messages }}</p> {% endif %}
+            <h2>The Target</h2>
+            <input type="text" id="target" name="target" placeholder="Enter the location..."/>
+            <input type="submit" value="Execute Heist!" name="submit"/>
+        </form>
+    </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form role="form" method="POST" action="restore_loot">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="editModalLabel">Update Song Metadata</h4>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Title:</label>
+                            <input type="text" class="form-control" id="modal-title" name="title">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Artist:</label>
+                            <input type="text" class="form-control" id="modal-artist" name="artist" value='data-title'>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Album:</label>
+                            <input type="text" class="form-control" id="modal-album" name="album">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Filename:</label>
+                            <input type="text" class="form-control" id="modal-filename" name="filename">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" id="btnUpdate" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endwith %}
+</body>
+
+<script>
+$('#editModal').on('show.bs.modal', function (event) {
+  var title = $(event.relatedTarget).data('title');
+  $(this).find("#modal-title").val(title);
+
+  var artist = $(event.relatedTarget).data('artist');
+  $(this).find("#modal-artist").val(artist);
+
+  var album = $(event.relatedTarget).data('album');
+  $(this).find("#modal-album").val(album);
+
+  var filename = $(event.relatedTarget).data('filename');
+  $(this).find("#modal-filename").val(filename);
+});
+</script>

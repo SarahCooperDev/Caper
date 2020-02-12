@@ -11,16 +11,37 @@
 <body>
     {% with messages = get_flashed_messages() %}
     <div class="plan_title_div">
-        <h1>The Plan</h1>
-        <p class="subtitle">To acquire all the loot!</p>
+        <table style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="text-align: left;">
+                        <h1>The Plan</h1>
+                    </td>
+                    <td style="text-align: right;">
+                        <a href='looting' class="nav_links">Looting</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><hr></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;" >
+                        <p class="subtitle">To discover all the things!</p>
+                    </td>
+                    <td style="text-align: right;">
+                        <a href="discovery" class="nav_links">Discovery</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div class="treasury_div">
         <h2>Treasury</h2>
         <hr/>
         <ul style="padding:0px">
             {% for item in loot %}
-                {% if item.title in messages %}<li style="background-color: lightgrey">
-                {% else %} <li style="margin:0px; padding: 3px"> {% endif %}
+                {% if item.title in messages %}<li style="background-color: #e8e6ff; padding: 10px">
+                {% else %} <li style="margin:0px; padding: 10px"> {% endif %}
                 <a data-toggle="modal" data-target="#editModal" data-title='{{ item.title }}' 
                     data-artist='{{ item.artist }}' data-album='{{ item.album }}' data-filename='{{ item.filename }}'>
                     <h5>{{ item.title }}</h5>
@@ -32,7 +53,6 @@
     </div>
     <div class="drawing_board_div">
         <form method="POST" action="execute_heist">
-            {% if messages %}<p>{{ messages }}</p> {% endif %}
             <h2>The Target</h2>
             <input type="text" id="target" name="target" placeholder="Enter the location..."/>
             <input type="submit" value="Execute Heist!" name="submit"/>

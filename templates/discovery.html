@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<head>
+    <title>The Heist</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+    <div class="plan_title_div">
+        <table style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="text-align: left;">
+                        <h1>The Plan</h1>
+                    </td>
+                    <td style="text-align: right;">
+                        <a href='looting' class="nav_links">Looting</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><hr></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;" >
+                        <p class="subtitle">To discover all the things!</p>
+                    </td>
+                    <td style="text-align: right;">
+                        <a href="discovery" class="nav_links">Discovery</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="source_div">
+        <div class="discovery_div">
+            <form method="POST" action="discovery">
+                <h2>The Source</h2>
+                <table class="source_input_table">
+                    <tbody class="source_input_table">
+                        <tr>
+                            <td><input type="text" id="target" name="target" placeholder="Enter the source..."/></td>
+                            <td><input type="submit" value="Discover!" name="submit"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        
+        <div class="intel_div">
+            {% if intel %}
+                <table style="width: 100%;">
+                    <tbody>
+                        <tr>
+                            <td style='width: 33%;'></td>
+                            <td style='width: 33%;'><h2>Intel</h2></td>
+                            <td style='text-align: right; width: 33%;'>
+                                <button onclick="selectText('intel_text_div')">Select</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr/>
+                <div id="intel_text_div" style="text-align: left;">{{ intel|safe }}</div>
+            {% endif %}
+            <hr>
+            {% if messages %}
+                <p>{{messages}}</p>
+            {% endif %}
+        </div>
+    </div>
+    
+    {% endwith %}
+</body>
+
+<script>
+    function selectText(divId){
+        if(document.selection){
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(divId))
+            range.select();
+        } else if(window.getSelection){
+            var range = document.createRange();
+            range.selectNode(document.getElementById(divId))
+            window.getSelection().addRange(range)
+        }
+    }
+</script>

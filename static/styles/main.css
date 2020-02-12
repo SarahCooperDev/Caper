@@ -18,7 +18,8 @@ h2{
     font-family:  FreeMono, "Andale Mono";
     font-style: oblique;
     font-variant: small-caps;
-    margin: 3% 0%;
+    margin: 0% 0%;
+    font-size: 1.5em;
 }
 
 input{
@@ -35,6 +36,14 @@ input[type=submit]{
     font-size: 18px;
 }
 
+a.nav_links{
+    color: #000000;
+    font-family:  FreeMono, "Andale Mono";
+    font-style: oblique;
+    font-variant: small-caps;
+    font-size: 1.5em;
+}
+
 ul{ 
     list-style-type: none; 
     padding: 5px;
@@ -42,11 +51,15 @@ ul{
 
 
 .plan_title_div{
-    margin: 5% 15% 0%;
+    margin: 2% 15% 0%;
     background-color:rgb(255,255,255);
     opacity:0.99;
     padding: 2%;
     box-shadow: 12px 12px 2px 1px rgba(2, 2, 66, 0.2);
+}
+
+.source_input_table{
+    width: 100%;
 }
 
 
@@ -73,3 +86,10 @@ ul{
     float: right;
 }
 
+.source_div{
+    margin: 2% 15% 0%;
+    background-color:rgb(255,255,255);
+    opacity:0.99;
+    padding: 1% 2%;
+    box-shadow: 12px 12px 2px 1px rgba(2, 2, 66, 0.2);
+}

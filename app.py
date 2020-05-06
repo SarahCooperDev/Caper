@@ -2,6 +2,7 @@ from flask import Flask, flash
 from flask import render_template
 from flask import request
 from flask import redirect, url_for
+from flask import send_file
 import os
 
 from models.restore_song_loot import updateLootProps, getLootProps, categoriseLoot
@@ -11,7 +12,7 @@ from models.mark_ffnet import acquireFFnet
 from models.mark_smbc import acquireSmbc
 
 app = Flask(__name__)
-app.secret_key = b'speakthyvow'
+app.secret_key = b'judgemyvow'
 
 ###########################################################################
 #                            Navigation                                   #
@@ -61,6 +62,13 @@ def executeHeist():
 #                            API's                                #
 ###################################################################
 
+@app.route('/store_loot')
+def storeLoot():
+    filename = request.args.get('filename')
+    print('filename ' + str(filename))
+    return send_file('../loot/' + filename, mimetype='audio/mpeg', attachment_filename=filename, as_attachment=True)
+
+
 @app.route('/api/discover_intel', methods=['POST'])
 def discoverIntel():
     print("Discovering intel")
@@ -107,18 +115,3 @@ def acquireSong():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-
-#@app.route('/new_heist', methods=['GET'])
-#def newHeist():
-#    return redirect(url_for('looting'), code=307)
-
-#@app.route('/mission_complete', methods=['POST'])
-#def missionComplete():
-#    print("Mission Complete!")
-#    response = acquireSong()
-#    print(response)
-#    loot = bask()
-#    return render_template('targetAquired.html', acquisition=response, loot=loot)

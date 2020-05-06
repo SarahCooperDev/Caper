@@ -42,11 +42,26 @@
             {% for item in loot %}
                 {% if item.title in messages %}<li style="background-color: #e8e6ff; padding: 10px">
                 {% else %} <li style="margin:0px; padding: 10px"> {% endif %}
-                <a data-toggle="modal" data-target="#editModal" data-title='{{ item.title }}' 
-                    data-artist='{{ item.artist }}' data-album='{{ item.album }}' data-filename='{{ item.filename }}'>
-                    <h5>{{ item.title }}</h5>
-                    <p style="margin:0px">{{ item.artist }} - {{ item.album }}</p>
-                </a></li>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <form class="download_form" action='/store_loot' method='GET'>
+                                    <input type="hidden" id="filename" name="filename" value='{{ item.filename }}'>
+                                    <input type="image" class='download_btn_icon'src="\static\assets\DownloadBtn.png" alt="Download Image">
+                                </form>
+                            </td>
+                            <td>
+                                <a data-toggle="modal" data-target="#editModal" data-title='{{ item.title }}' 
+                                    data-artist='{{ item.artist }}' data-album='{{ item.album }}' data-filename='{{ item.filename }}'>
+                                    <h5>{{ item.title }}</h5>
+                                    <p style="margin:0px">{{ item.artist }} - {{ item.album }}</p>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </li>
               <li><hr style="margin: 0px; padding:0px" /></li>
             {% endfor %}
         </ul>

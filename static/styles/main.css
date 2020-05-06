@@ -8,6 +8,14 @@ body{
 
 }
 
+.download_form{
+    width: 100px;
+}
+
+.download_btn_icon{
+    width: 100px;
+}
+
 h1{
     font-family:  FreeMono, "Andale Mono";
     font-style: oblique;

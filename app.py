@@ -11,6 +11,8 @@ from models.mark_google import acquireGoogle
 from models.mark_ffnet import acquireFFnet
 from models.mark_smbc import acquireSmbc
 
+from logs.printLog import printLog
+
 app = Flask(__name__)
 app.secret_key = b'judgemyvow'
 
@@ -44,14 +46,14 @@ def discovery():
 # Call for altering the details of a piece of treasure
 @app.route('/restore_loot', methods=['POST'])
 def restoration():
-    print("Restoring...")
+    printLog("Restoring...")
     completed = restoreLoot()
     return redirect(url_for('looting'), code=307)
 
 # Call for retrieving a piece of loot
 @app.route('/execute_heist', methods=['POST'])
 def executeHeist():
-    print("Executing heist")
+    printLog("Executing heist")
     response = acquireSong()
     categoriseLoot(response)
     flash(response)
@@ -65,13 +67,13 @@ def executeHeist():
 @app.route('/store_loot')
 def storeLoot():
     filename = request.args.get('filename')
-    print('filename ' + str(filename))
+    printLog('filename ' + str(filename))
     return send_file('../loot/' + filename, mimetype='audio/mpeg', attachment_filename=filename, as_attachment=True)
 
 
 @app.route('/api/discover_intel', methods=['POST'])
 def discoverIntel():
-    print("Discovering intel")
+    printLog("Discovering intel")
     if request.method == 'POST':
         target = request.form['target']
         acquisition = routeDiscovery(target)
@@ -87,13 +89,13 @@ def routeDiscovery(target):
     elif 'smbc-comics.com' in target:
         acquisition = acquireSmbc(target)
     else:
-        print("Mark's security too high: level up to perform caper on " + str(target))
+        printLog("Mark's security too high: level up to perform caper on " + str(target))
 
     return acquisition
 
 @app.route('/api/restore_loot', methods=['POST'])
 def restoreLoot():
-    print('restoration')
+    printLog('restoration')
     if request.method == 'POST':
         updateLootProps(request.form)
 
@@ -106,11 +108,11 @@ def bask():
 
 @app.route('/api/acquire_song', methods=['POST'])
 def acquireSong():
-    print("Acquiring song")
+    printLog("Acquiring song")
     if request.method == 'POST':
         target = request.form['target']
         acquisition = acquireYoutube(target)
-        print("Acquisition: " + acquisition)
+        printLog("Acquisition: " + acquisition)
         return acquisition
 
 if __name__ == '__main__':

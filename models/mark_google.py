@@ -1,13 +1,15 @@
 from flask import request
 import requests
 
+from logs.printLog import printLog
+
 '''
     Retrieves text from view-only Google docs
     Input: URL of google doc
     Output: text of google doc
 '''
 def acquireGoogle(url):
-    print("URL is " + url)
+    printLog("URL is " + url)
     r = requests.get(url)
     content = r.text
     intel = processGoogleIntel(content)

@@ -1,6 +1,8 @@
 from flask import request
 import requests
 
+from logs.printLog import printLog
+
 def acquireSmbc(url):
     count = 0
     intel = ''
@@ -9,7 +11,7 @@ def acquireSmbc(url):
     latestURL = url
 
     while furtherIntel != -1 and newURL != -1 and count <= 100:
-        print("In while")
+        printLog("In while")
         furtherIntel = performRetrieval(newURL)
         processedIntel = processIntel(furtherIntel)
 
@@ -43,12 +45,12 @@ def getIntelLocation(url, intel):
         navElement = navIndex[1]
         closeNavIndex = navElement.index('"')
         nextLink = navElement[:closeNavIndex]
-        print("New Link " + str(nextLink))
+        printLog("New Link " + str(nextLink))
 
         return nextLink
 
 def performRetrieval(url):
-    print("URL is " + str(url))
+    printLog("URL is " + str(url))
     r = requests.get(url)
     content = r.text
     return content

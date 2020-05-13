@@ -2,6 +2,8 @@ from flask import request
 import eyed3
 import os
 
+from logs.printLog import printLog
+
 def categoriseLoot(filename):
     audiofile = eyed3.load("../loot/" + filename  + '.mp3')
     audiofile.tag.title = filename
@@ -16,10 +18,10 @@ def updateLootProps(form):
     artist = form['artist']
     album = form['album']
     filename = form['filename']
-    print('Title: ' + title)
-    print('artist: ' + artist)
-    print(' album: ' + album)
-    print('filename: ' + filename)
+    printLog('Title: ' + title)
+    printLog('artist: ' + artist)
+    printLog(' album: ' + album)
+    printLog('filename: ' + filename)
 
     audiofile = eyed3.load("../loot/" + filename)
     audiofile.tag.title = title
@@ -31,16 +33,16 @@ def updateLootProps(form):
 
 def getLootProps():
     lootFiles = os.listdir('../loot')
-    print(lootFiles)
+    printLog(lootFiles)
 
     loot = []
 
     for lootprops in lootFiles:
         audiofile = eyed3.load("../loot/" + lootprops)
-        print(audiofile)
-        print(audiofile.tag.artist)
-        print(audiofile.tag.album)
-        print(audiofile.tag.title)
+        printLog(audiofile)
+        printLog(audiofile.tag.artist)
+        printLog(audiofile.tag.album)
+        printLog(audiofile.tag.title)
         loot.append({'filename': lootprops, 'title':audiofile.tag.title, 'artist': audiofile.tag.artist, 'album': audiofile.tag.album})
 
     return loot

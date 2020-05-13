@@ -1,6 +1,7 @@
 from flask import request
 import requests
 
+from logs.printLog import printLog
 
 def acquireFFnet(url):
     content = performRetrieval(url)
@@ -41,7 +42,7 @@ def getIntelLocation(url, intel):
         urlSplit = url.split('/')
         chapterCount = urlSplit[5]
         newCount = int(chapterCount) + 1
-        print(chapterCount)
+        printLog(chapterCount)
 
         newURL = ''
         for u in urlSplit:
@@ -54,13 +55,13 @@ def getIntelLocation(url, intel):
 
 
 def performRetrieval(url):
-    print("URL is " + str(url))
+    printLog("URL is " + str(url))
     r = requests.get(url)
     content = r.text
     return content
 
 def processIntel(content):
-    print(content)
+    printLog(content)
     intel = content.split("<div class='storytext xcontrast_txt nocopy' id='storytext'>")
     
     if len(intel) == 0:

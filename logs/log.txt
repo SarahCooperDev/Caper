@@ -14,3 +14,8 @@ The Reluctant Heroes
 Animes
 Shingeki no Kyojin - AoT
 The Reluctant Heroes
+['Reluctant Heroes - Levi - Attack on Titan AMV.mp3']
+<eyed3.mp3.Mp3AudioFile object at 0x050F6950>
+Animes
+Shingeki no Kyojin - AoT
+The Reluctant Heroes

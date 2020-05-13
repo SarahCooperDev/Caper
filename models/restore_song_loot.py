@@ -5,7 +5,8 @@ import os
 from logs.printLog import printLog
 
 def categoriseLoot(filename):
-    audiofile = eyed3.load("../loot/" + filename  + '.mp3')
+    lootpath = os.path.join("..", "loot", filename + '.mp3')
+    audiofile = eyed3.load(lootpath)
     audiofile.tag.title = filename
     audiofile.tag.artist = 'Unknown'
     audiofile.tag.album = 'Unknown'
@@ -23,7 +24,8 @@ def updateLootProps(form):
     printLog(' album: ' + album)
     printLog('filename: ' + filename)
 
-    audiofile = eyed3.load("../loot/" + filename)
+    lootpath = os.path.join("..", "loot", filename)
+    audiofile = eyed3.load(lootpath)
     audiofile.tag.title = title
     audiofile.tag.artist = artist
     audiofile.tag.album = album
@@ -32,13 +34,15 @@ def updateLootProps(form):
     return 0
 
 def getLootProps():
-    lootFiles = os.listdir('../loot')
+    lootpath = os.path.join('..', 'loot')
+    lootFiles = os.listdir(lootpath)
     printLog(lootFiles)
 
     loot = []
 
     for lootprops in lootFiles:
-        audiofile = eyed3.load("../loot/" + lootprops)
+        proppath = os.path.join(lootpath, lootprops)
+        audiofile = eyed3.load(proppath)
         printLog(audiofile)
         printLog(audiofile.tag.artist)
         printLog(audiofile.tag.album)

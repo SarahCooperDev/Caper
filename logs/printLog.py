@@ -1,6 +1,6 @@
 import os
 
-currentPath = 'logs'
+currentPath = os.path.dirname(__file__)
 #currentPath = os.path.join('caper', 'heist', 'logs')
 
 def printLog(text):

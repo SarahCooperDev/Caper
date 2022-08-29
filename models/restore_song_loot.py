@@ -4,7 +4,7 @@ import os
 
 from logs.printLog import printLog
 
-currentPath = '..'
+currentPath = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
 #currentPath = 'caper'
 
 def categoriseLoot(filename):

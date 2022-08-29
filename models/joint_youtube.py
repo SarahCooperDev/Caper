@@ -22,7 +22,9 @@ def acquireYoutube(url):
         printLog(info.get('title'))
         title = info.get('title')
         titleDecoded = title.encode("ascii", errors="ignore").decode().replace('||', '')
+        titleDecoded = titleDecoded.encode("ascii", errors="ignore").decode().replace('"', '')
+        titleDecoded = titleDecoded.encode("ascii", errors="ignore").decode().replace('\'', '')
         printLog("done")
         printLog(titleDecoded)
-        os.rename('../loot/' + title.replace('||', '_') + '.mp3', '../loot/' + titleDecoded + '.mp3')
+        os.rename('../loot/' + title.replace('||', '_').replace('"', '\'') + '.mp3', '../loot/' + titleDecoded + '.mp3')
         return titleDecoded

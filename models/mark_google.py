@@ -28,6 +28,8 @@ def processGoogleIntel(content):
         intel += chunk
 
     parsedIntel = intel.replace('\\n', '<br />')
+    parsedIntel = parsedIntel.replace("\\u0027", "'")
+    parsedIntel = parsedIntel.replace('\\"', '"')
     parsedIntel = parsedIntel.replace('\\t', '&emsp;')
 
     return parsedIntel

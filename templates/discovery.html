@@ -66,6 +66,15 @@
                 <hr/>
                 <div id="intel_text_div" style="text-align: left;">{{ intel|safe }}</div>
             {% endif %}
+            <table style="width: 100%;">
+                <tbody>
+                    <tr>
+                        <td style="width: 33%; color:grey;">fanfiction.net</td>
+                        <td style="width: 33%; color:grey;">google</td>
+                        <td style="width: 33%; color:grey;">smbc</td>
+                    </tr>
+                </tbody>
+            </table>
             <hr>
             {% if messages %}
                 <p>{{messages}}</p>
@@ -86,6 +95,10 @@
             var range = document.createRange();
             range.selectNode(document.getElementById(divId))
             window.getSelection().addRange(range)
+        } else {
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(divId))
+            range.select();
         }
     }
 </script>

@@ -61,7 +61,8 @@ def performRetrieval(url):
     return content
 
 def processIntel(content):
-    printLog(content)
+    print("In process Intel")
+    print(content)
     intel = content.split("<div class='storytext xcontrast_txt nocopy' id='storytext'>")
     
     if len(intel) == 0:
